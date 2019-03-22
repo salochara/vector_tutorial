@@ -5,33 +5,52 @@
 using namespace std;
 
 void printVV(const vector < vector <char> > &);
-
 void fillVV(vector <vector <char> > &);
 void caseBaseBigExpression(vector <char> bigExpression, vector < vector <char> > & casoBaseExpresionGrande);
-std::vector < vector <char> > pruebaRecursionGrande(vector < vector<char> > expression, vector<vector<char> > outerVector);
-
+std::vector < vector <char> > recursion(vector<vector<char> > expression, vector<vector<char> > outerVector);
+void callBaseCase(vector <vector <char> > bigExpression, vector <vector <char> > & resultOfRecursion );
+void callZeroTimes();
 
 int main()
 {
-    vector < vector <char> > expresionGrande;
-    fillVV(expresionGrande);
+    vector < vector <char> > bigExpression;
+    fillVV(bigExpression);
 
-//    printVV(expresionGrande);
-
-    vector < vector <char> > casoBaseExpresionGrande;
-    for (int i = 0; i < expresionGrande.size(); ++i) {
-        caseBaseBigExpression(expresionGrande[i], casoBaseExpresionGrande);
-    }
-
-//    printVV(casoBaseExpresionGrande);
+    callZeroTimes();
+    vector < vector <char> > resultOfRecursion;
+    callBaseCase(bigExpression, resultOfRecursion);
 
     vector < vector <char> > result;
-    result = pruebaRecursionGrande(expresionGrande, casoBaseExpresionGrande);
+    int n;
+    cout << "How many times do you want to iterate? ";
+    cin >> n;
+
+    for (int i = 0; i < n; ++i) {
+        result = recursion(bigExpression, resultOfRecursion);
+        cout << "----------" << endl;
+        printVV(result);
+    }
+/*
+
+    result = recursion(bigExpression, resultOfRecursion);
     printVV(result);
-//    result = pruebaRecursionGrande(expresionGrande, result);
-//    printVV(result);
+*/
 
     return 0;
+}
+
+void callZeroTimes()
+{
+    cout << "0 times: λ" << endl;
+}
+
+void callBaseCase(vector <vector <char> > bigExpression, vector <vector <char> > & resultOfRecursion )
+{
+    for (int i = 0; i < bigExpression.size(); ++i) {
+        caseBaseBigExpression(bigExpression[i], resultOfRecursion);
+    }
+    cout << "1 time: ";
+    printVV(resultOfRecursion);
 }
 
 
@@ -62,32 +81,7 @@ bool cleanVector(const vector <char> vectorResultado, vector < vector <char> > n
     return true;
 }
 
-void recursionExtra(vector < vector <char> > & newResult, vector < vector<char> > bigVectorExpression )
-{
-    vector <char> singleExpression;
-    vector < vector <char> > newVector;
-    vector <char> singleNewResult;
-    vector <char> tmp;
-    for (int i = 0; i < bigVectorExpression.size(); ++i) {
-        singleExpression = bigVectorExpression[i];
-        for (int j = 0; j < newResult.size(); ++j) {
-            singleNewResult = newResult[j];
-            for (int k = 0; k < singleExpression.size(); ++k) {
-                if(singleExpression[k] == 'a' || singleExpression[k] == 'b' || singleExpression[k] == 'c'){
-                    tmp.push_back(singleExpression[k]);
-                }else{
-                    for (int l = 0; l < singleNewResult.size(); ++l) {
-                        tmp.push_back(singleNewResult[l]);
-                    }
-                }
-            }
-            newVector.push_back(tmp);
-        }
-    }
-}
-
-
-std::vector < vector <char> > pruebaRecursionGrande(vector < vector<char> > bigVectorExpression, vector<vector<char> > casoBaseExpresionGrande)
+std::vector < vector <char> > recursion(vector<vector<char> > bigVectorExpression, vector<vector<char> > casoBaseExpresionGrande)
 {
     vector <vector <char> > newVector;
     vector <char> porComparar;
@@ -113,7 +107,6 @@ std::vector < vector <char> > pruebaRecursionGrande(vector < vector<char> > bigV
             resultadoComparar.clear();
         }
     }
-//    recursionExtra(newVector, bigVectorExpression);
     return newVector;
 }
 
