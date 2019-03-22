@@ -1,40 +1,51 @@
-#include <iostream>
 #include <vector>
+#include <iostream>
 #include <string>
-
 using namespace std;
 
+// Para imprimir un vector de vectores. Utilizando const y por referencia (para no copiar el vector cada llamada)
 void printVV(const vector < vector <char> > &);
+
+// Se pasa un vector de vectores por referencia para llenarlo con caracteres
 void fillVV(vector <vector <char> > &);
-void caseBaseBigExpression(vector <char> bigExpression, vector < vector <char> > & casoBaseExpresionGrande);
-std::vector < vector <char> > recursion(vector<vector<char> > expression, vector<vector<char> > outerVector);
-void callBaseCase(vector <vector <char> > bigExpression, vector <vector <char> > & resultOfRecursion );
+
+// La primera iteración de recursión. Se recibe una expresión con la definición de lenguaje y otro vector para almacenar el resultado (por referencia).
+void caseBaseBigExpression(vector <char>, vector < vector <char> > &);
+
+// El método de recursión. Regresa un vector de vectores como resultado.
+std::vector < vector <char> > recursion(vector<vector<char> >, vector<vector<char> >);
+
+// Para llamar a la función caseBaseBigExpression desde el main.
+void callBaseCase(vector <vector <char> >, vector <vector <char> > &);
+
+// Para llamar a la función para la iteración 0.
 void callZeroTimes();
+
+// Función booleana para revisar que haya vectores duplicados dentro del vector de vectores de los resultados.
+bool cleanVector(const vector <char> &, vector < vector <char> > );
 
 int main()
 {
     vector < vector <char> > bigExpression;
     fillVV(bigExpression);
-
-    callZeroTimes();
     vector < vector <char> > resultOfRecursion;
-    callBaseCase(bigExpression, resultOfRecursion);
-
     vector < vector <char> > result;
     int n;
     cout << "How many times do you want to iterate? ";
     cin >> n;
 
-    for (int i = 0; i < n; ++i) {
-        result = recursion(bigExpression, resultOfRecursion);
-        cout << "----------" << endl;
-        printVV(result);
-    }
-/*
+    callZeroTimes();
+    callBaseCase(bigExpression, resultOfRecursion);
 
     result = recursion(bigExpression, resultOfRecursion);
     printVV(result);
-*/
+    cout << "---------------------------------" << endl;
+
+    for (int i = 0; i < n; ++i) {
+        result = recursion(bigExpression, result);
+        printVV(result);
+        cout << "---------------------------------" << endl;
+    }
 
     return 0;
 }
@@ -46,7 +57,7 @@ void callZeroTimes()
 
 void callBaseCase(vector <vector <char> > bigExpression, vector <vector <char> > & resultOfRecursion )
 {
-    for (int i = 0; i < bigExpression.size(); ++i) {
+    for (unsigned int i = 0; i < bigExpression.size(); ++i) {
         caseBaseBigExpression(bigExpression[i], resultOfRecursion);
     }
     cout << "1 time: ";
@@ -71,17 +82,17 @@ void fillVV(vector<vector<char> > & vvExpression) {
     }
 }
 
-bool cleanVector(const vector <char> vectorResultado, vector < vector <char> > newVector)
+bool cleanVector(const vector <char> & vectorResultado, vector < vector <char> > newVector)
 {
-    for (int i = 0; i < newVector.size(); ++i) {
-        if(vectorResultado == newVector[i]){
+    for (const auto &i : newVector) {
+        if(vectorResultado == i){
             return false;
         }
     }
     return true;
 }
 
-std::vector < vector <char> > recursion(vector<vector<char> > bigVectorExpression, vector<vector<char> > casoBaseExpresionGrande)
+std::vector < vector <char> > recursion(vector<vector<char> > bigVectorExpression, vector<vector<char> >  casoBaseExpresionGrande)
 {
     vector <vector <char> > newVector;
     vector <char> porComparar;
@@ -113,14 +124,13 @@ std::vector < vector <char> > recursion(vector<vector<char> > bigVectorExpressio
 void caseBaseBigExpression(vector <char> bigExpression, vector < vector <char> > &casoBaseExpresionGrande)
 {
     vector <char> tmp;
-    for (int i = 0; i < bigExpression.size(); ++i) {
-        if (bigExpression[i] == 'a' || bigExpression[i] == 'b' || bigExpression[i] == 'c'){
-            tmp.push_back(bigExpression[i]);
+    for (char i : bigExpression) {
+        if (i == 'a' || i == 'b' || i == 'c'){
+            tmp.push_back(i);
         }
     }
     casoBaseExpresionGrande.push_back(tmp);
 }
-
 
 void printVV(const vector < vector <char> > & vec)
 {
