@@ -38,6 +38,8 @@ int main()
 
     vector < vector <char> > result;
     result = pruebaRecursionGrande(expresionGrande, casoBaseExpresionGrande);
+//    printVV(result);
+    result = pruebaRecursionGrande(expresionGrande, result);
     printVV(result);
 
    /* // se define la expresión
@@ -104,7 +106,15 @@ void fillVV(vector<vector<char> > & vvExpression) {
     }
 }
 
-
+bool cleanVector(const vector <char> vectorResultado, vector < vector <char> > newVector)
+{
+    for (int i = 0; i < newVector.size(); ++i) {
+        if(vectorResultado == newVector[i]){
+            return false;
+        }
+    }
+    return true;
+}
 
 // esto funciona sin problema con cualquier expresión, pero UNA sola expresión.
 std::vector < vector <char> > pruebaRecursion(vector<char> expression, vector<vector<char> > &outerVector)
@@ -128,7 +138,6 @@ std::vector < vector <char> > pruebaRecursion(vector<char> expression, vector<ve
         }
     }
     return newOuterVector;
-
 }
 
 std::vector < vector <char> > pruebaRecursionGrande(vector < vector<char> > bigVectorExpression, vector<vector<char> > casoBaseExpresionGrande)
@@ -151,7 +160,9 @@ std::vector < vector <char> > pruebaRecursionGrande(vector < vector<char> > bigV
                     }
                 }
             }
-            newVector.push_back(resultadoComparar);
+            if(cleanVector(resultadoComparar, newVector)){
+                newVector.push_back(resultadoComparar);
+            }
             resultadoComparar.clear();
         }
     }
