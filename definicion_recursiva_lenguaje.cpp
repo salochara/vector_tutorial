@@ -3,6 +3,9 @@
 #include <string>
 using namespace std;
 
+// Se recommienda compilar el archivo con el comando
+// g++ -std=c++11 definicion_recursiva_lenguaje.cpp
+
 // Para imprimir un vector de vectores. Utilizando const y por referencia (para no copiar el vector cada llamada)
 void printVV(const vector < vector <char> > &);
 
