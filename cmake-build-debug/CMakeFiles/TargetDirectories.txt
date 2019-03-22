@@ -1,0 +1,6 @@
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/recursionMultiple.dir
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/recursion.dir
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/referencia_vector.dir
+/Users/salo/CLionProjects/vector_tutorial/cmake-build-debug/CMakeFiles/vector_tutorial.dir

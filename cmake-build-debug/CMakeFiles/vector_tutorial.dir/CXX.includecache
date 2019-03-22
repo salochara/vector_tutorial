@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/salo/CLionProjects/vector_tutorial/.idea/vec.cpp
+
+/Users/salo/CLionProjects/vector_tutorial/main.cpp
+iostream
+-
+vector
+-
+
